@@ -4,6 +4,7 @@ pipeline {
     stages {
 
 stage ('CI'){
+steps {
 node {
 
     checkout scm
@@ -31,7 +32,7 @@ node {
           testResults: 'test-results/**/test-results.xml'])
           
 }
-
+}
 // demoing a second agent
 node {
     // on windows use: bat 'dir'
