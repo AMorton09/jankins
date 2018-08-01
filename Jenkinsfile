@@ -1,5 +1,5 @@
 
-
+import hudson.FilePath
 
 stage 'CI'
 node {
