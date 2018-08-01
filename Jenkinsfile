@@ -90,7 +90,7 @@ sh 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: app
 
 
 def runTests(browser) {
-    node {
+    
         // on windows use: bat 'del /S /Q *'
         bat 'del /S /Q *'
 
@@ -101,7 +101,7 @@ def runTests(browser) {
 
         step([$class: 'JUnitResultArchiver', 
               testResults: 'test-results/**/test-results.xml'])
-    }
+    
 }
 
 def notify(status){
