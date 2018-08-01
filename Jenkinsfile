@@ -1,5 +1,7 @@
 
-
+pipeline {
+    agent none 
+    stages {
 
 stage 'CI'
 node {
@@ -84,7 +86,7 @@ stage name: 'Deploy to staging', concurrency: 1
 node {
     bat 'echo TEST'
 }
-
+    }}
 
 post { 
         always { 
