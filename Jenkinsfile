@@ -47,20 +47,7 @@ node {
 }
 
 
-def runTests(browser) {
-    node {
-        // on windows use: bat 'del /S /Q *'
-        bat 'del /S /Q *'
 
-        unstash 'everything'
-
-        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
-        bat "npm run test-single-run -- --browsers ${browser}"
-
-        step([$class: 'JUnitResultArchiver', 
-              testResults: 'test-results/**/test-results.xml'])
-    }
-}
 //parallel integration testing
 stage 'Browser Testing'
 parallel chrome: {
@@ -102,7 +89,20 @@ post {
 
 
 
+def runTests(browser) {
+    node {
+        // on windows use: bat 'del /S /Q *'
+        bat 'del /S /Q *'
 
+        unstash 'everything'
+
+        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
+        bat "npm run test-single-run -- --browsers ${browser}"
+
+        step([$class: 'JUnitResultArchiver', 
+              testResults: 'test-results/**/test-results.xml'])
+    }
+}
 
 def notify(status){
     emailext (
