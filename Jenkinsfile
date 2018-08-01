@@ -1,3 +1,5 @@
+
+stages{
 stage 'CI'
 node {
 
@@ -62,8 +64,63 @@ def runTests(browser) {
     }
 }
 
+def notify_kibana() {
+ sh 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: application/json" -d" {
+  {
+   "build": {
+    "number": $ {
+     env.BUILD_NUMBER
+    },
+    "log": "",
+    "url": $ {
+     env.JOB_URL
+    },
+    "status": $ {
+     currentBuild.currentResult
+    },
+    "scm": {
+     "culprits": [],
+     "changes": [],
+     "commit": $ {
+      scm.GIT_COMMIT
+     },
+     "url": $ {
+      scm.GIT_URL
+     },
+     "branch": $ {
+      scm.GIT_BRANCH
+     }
+    },
+    "timestamp": $ {
+     currentBuild.startTimeInMillis - currentBuild.duration
+    },
+    "notes": "",
+    "artifacts": {},
+    "phase": "COMPLETED",
+    "full_url": $ {
+     env.BUILD_URL
+    },
+    "queue_id": 0
+   },
+   "display_name": $ {
+    env.BUILD_DISPLAY_NAME
+   },
+   "name": $ {
+    env.JOB_NAME
+   },
+   "url": "job/" + $ {
+    env.BUILD_DISPLAY_NAME
+   } + "/" + $ {
+    env.BUILD_NUMBER
+   }
+  }
+ }
+ "
+ '
+}
+
 node {
-    notify("Deploy to staging?")
+    bat 'echo TEST'
 }
 
 input 'Deploy to staging?'
@@ -73,17 +130,16 @@ input 'Deploy to staging?'
 // newest is only that will be allowed through, rest will be canceled
 stage name: 'Deploy to staging', concurrency: 1
 node {
-    // write build number to index page so we can see this update
-    // on windows use: bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
-    bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
-    
-    // deploy to a docker container mapped to port 3000
-    // on windows use: bat 'docker-compose up -d --build'
-    bat 'docker-compose up -d --build'
-    
-    notify 'Solitaire Deployed!'
-}
+    bat 'echo TEST'
+}}
 
+
+post { 
+        always { 
+            bat 'echo kibana post sent?'
+            notify_kibana()
+        }
+    }
 
 
 
