@@ -4,7 +4,7 @@ pipeline {
     stages {
 
 stage ('CI'){
-
+node {
 
     checkout scm
 
@@ -30,10 +30,10 @@ stage ('CI'){
     step([$class: 'JUnitResultArchiver', 
           testResults: 'test-results/**/test-results.xml'])
           
-
+}
 
 // demoing a second agent
-
+node {
     // on windows use: bat 'dir'
     bat 'dir'
 
@@ -44,7 +44,7 @@ stage ('CI'){
 
     // on windows use: bat 'dir'
     bat 'dir'
-
+}
 
 }
 
@@ -57,9 +57,9 @@ parallel chrome: {
 
 
 
-
+node {
     bat 'echo TEST'
-
+}
 
 input 'Deploy to staging?'
 }
@@ -67,9 +67,9 @@ input 'Deploy to staging?'
 // and if multiple pipelines are executing, 
 // newest is only that will be allowed through, rest will be canceled
 stage name: 'Deploy to staging', concurrency: 1
-
+node {
     bat 'echo TEST'
-
+}
     }}
 
 post { 
@@ -90,7 +90,7 @@ sh 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: app
 
 
 def runTests(browser) {
-    
+    node {
         // on windows use: bat 'del /S /Q *'
         bat 'del /S /Q *'
 
@@ -101,7 +101,7 @@ def runTests(browser) {
 
         step([$class: 'JUnitResultArchiver', 
               testResults: 'test-results/**/test-results.xml'])
-    
+    }
 }
 
 def notify(status){
