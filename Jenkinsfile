@@ -1,7 +1,6 @@
 
 
 
-stages{
 stage 'CI'
 node {
 
@@ -84,7 +83,7 @@ input 'Deploy to staging?'
 stage name: 'Deploy to staging', concurrency: 1
 node {
     bat 'echo TEST'
-}}
+}
 
 
 post { 
