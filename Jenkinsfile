@@ -30,19 +30,6 @@ node {
           
 }
 
-// demoing a second agent
-node {
-    // on windows use: bat 'dir'
-    bat 'dir'
-
-    // on windows use: bat 'del /S /Q *'
-    bat 'del /S /Q *'
-
-    unstash 'everything'
-
-    // on windows use: bat 'dir'
-    bat 'dir'
-}
 
 
 
