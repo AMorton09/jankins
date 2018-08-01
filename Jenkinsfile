@@ -3,7 +3,7 @@ pipeline {
     agent none 
     stages {
 
-stage 'CI'
+stage ('CI'){
 node {
 
     checkout scm
@@ -46,10 +46,10 @@ node {
     bat 'dir'
 }
 
-
+}
 
 //parallel integration testing
-stage 'Browser Testing'
+stage ('Browser Testing'){
 parallel chrome: {
     runTests("Chrome")
 }
@@ -62,7 +62,7 @@ node {
 }
 
 input 'Deploy to staging?'
-
+}
 // limit concurrency so we don't perform simultaneous deploys
 // and if multiple pipelines are executing, 
 // newest is only that will be allowed through, rest will be canceled
