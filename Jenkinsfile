@@ -68,9 +68,12 @@ sh 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: app
 stage 'Browser Testing'
 parallel chrome: {
     runTests("Chrome")
-    notify_kibana()
 }
 
+stage 'Testing Post'
+node{
+    notify_kibana()
+}
 
 
 
