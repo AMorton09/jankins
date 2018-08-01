@@ -34,8 +34,8 @@ node {
 
 
 def notify_kibana() {
-def url = bat(returnStdout: true, script: 'git config remote.origin.url').trim()
-bat "curl -X POST \"http://127.0.0.1:5000/API/Jenkins/Build\" -H \"Content-Type: application/json\" -d \"{\"build\": {\"number\": ${env.BUILD_NUMBER},\"log\": \"\",\"url\": ${env.JOB_URL},\"status\": ${currentBuild.currentResult}, \"scm\": {\"culprits\": [],\"changes\": [], \"commit\": ${scm.GIT_COMMIT}, \"url\": "+bat+", \"branch\": ${scm.GIT_BRANCH}, \"timestamp\": ${currentBuild.startTimeInMillis - currentBuild.duration},\"notes\": "",\"artifacts\": {},\"phase\": \"COMPLETED\",\"full_url\": ${env.BUILD_URL},\"queue_id\": 0},\"display_name\": ${env.BUILD_DISPLAY_NAME},\"name\": ${env.JOB_NAME},\"url\": \"job/\"}\""
+bat "echo git config remote.origin.url"
+//bat "curl -X POST \"http://127.0.0.1:5000/API/Jenkins/Build\" -H \"Content-Type: application/json\" -d \"{\"build\": {\"number\": ${env.BUILD_NUMBER},\"log\": \"\",\"url\": ${env.JOB_URL},\"status\": ${currentBuild.currentResult}, \"scm\": {\"culprits\": [],\"changes\": [], \"commit\": ${scm.GIT_COMMIT}, \"url\": "+bat+", \"branch\": ${scm.GIT_BRANCH}, \"timestamp\": ${currentBuild.startTimeInMillis - currentBuild.duration},\"notes\": "",\"artifacts\": {},\"phase\": \"COMPLETED\",\"full_url\": ${env.BUILD_URL},\"queue_id\": 0},\"display_name\": ${env.BUILD_DISPLAY_NAME},\"name\": ${env.JOB_NAME},\"url\": \"job/\"}\""
 
 }
 
