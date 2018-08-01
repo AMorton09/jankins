@@ -30,14 +30,45 @@ node {
           
 }
 
+// demoing a second agent
+node {
+    // on windows use: bat 'dir'
+    bat 'dir'
 
+    // on windows use: bat 'del /S /Q *'
+    bat 'del /S /Q *'
 
+    unstash 'everything'
 
-
-def notify_kibana() {
-bat 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: application/json" -d" {{"build": {"number": $ { env.BUILD_NUMBER },"log": "","url": $ {env.JOB_URL},"status": $ {currentBuild.currentResult},   "scm": {"culprits": [],"changes": [],    "commit": $ {     scm.GIT_COMMIT    },    "url": $ {     scm.GIT_URL    },    "branch": $ {     scm.GIT_BRANC         },    "timestamp": $ {     currentBuild.startTimeInMillis - currentBuild.duration},"notes": "","artifacts": {},"phase": "COMPLETED","full_url": $ {     env.BUILD_URL    },    "queue_id": 0},"display_name": $ {env.BUILD_DISPLAY_NAME},"name": $ {env.JOB_NAME},"url": "job/" + $ {env.BUILD_DISPLAY_NAME} + "/" + $ {    env.BUILD_NUMBER}  } } " '
+    // on windows use: bat 'dir'
+    bat 'dir'
 }
 
+
+def runTests(browser) {
+    node {
+        // on windows use: bat 'del /S /Q *'
+        bat 'del /S /Q *'
+
+        unstash 'everything'
+
+        // on windows use: bat "npm run test-single-run -- --browsers ${browser}"
+        bat "npm run test-single-run -- --browsers ${browser}"
+
+        step([$class: 'JUnitResultArchiver', 
+              testResults: 'test-results/**/test-results.xml'])
+    }
+}
+
+def notify_kibana() {
+bat 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: application/json" -d "{{"build": {"number": ${env.BUILD_NUMBER},"log": "","url": ${env.JOB_URL},"status": ${currentBuild.currentResult},   "scm": {"culprits": [],"changes": [], "commit": ${scm.GIT_COMMIT}, "url": ${scm.GIT_URL}, "branch": ${scm.GIT_BRANCH}, "timestamp": ${currentBuild.startTimeInMillis - currentBuild.duration},"notes": "","artifacts": {},"phase": "COMPLETED","full_url": ${env.BUILD_URL},"queue_id": 0},"display_name": ${env.BUILD_DISPLAY_NAME},"name": ${env.JOB_NAME},"url": "job/" + ${env.BUILD_DISPLAY_NAME} + "/" + ${env.BUILD_NUMBER}}} " '
+}
+
+//parallel integration testing
+stage 'Browser Testing'
+parallel chrome: {
+    runTests("Chrome")
+}
 
 stage 'Testing Post'
 node{
