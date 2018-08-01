@@ -71,34 +71,6 @@ def notify_kibana() {
 sh 'curl -X POST "http://127.0.0.1:5000/API/Jenkins/Build" -H "Content-Type: application/json" -d" {{"build": {"number": $ { env.BUILD_NUMBER },"log": "","url": $ {env.JOB_URL},"status": $ {currentBuild.currentResult},   "scm": {"culprits": [],"changes": [],    "commit": $ {     scm.GIT_COMMIT    },    "url": $ {     scm.GIT_URL    },    "branch": $ {     scm.GIT_BRANC         },    "timestamp": $ {     currentBuild.startTimeInMillis - currentBuild.duration},"notes": "","artifacts": {},"phase": "COMPLETED","full_url": $ {     env.BUILD_URL    },    "queue_id": 0},"display_name": $ {env.BUILD_DISPLAY_NAME},"name": $ {env.JOB_NAME},"url": "job/" + $ {env.BUILD_DISPLAY_NAME} + "/" + $ {    env.BUILD_NUMBER}  } } " '
 }
 
-node {
-    bat 'echo TEST'
-}
-
-input 'Deploy to staging?'
-
-// limit concurrency so we don't perform simultaneous deploys
-// and if multiple pipelines are executing, 
-// newest is only that will be allowed through, rest will be canceled
-stage name: 'Deploy to staging', concurrency: 1
-node {
-    bat 'echo TEST'
-}
-
-
-post { 
-        always { 
-            bat 'echo kibana post sent?'
-            notify_kibana()
-        }
-    }
-
-
-
-
-
-
-
 
 
 
