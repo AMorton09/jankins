@@ -27,10 +27,7 @@ node {
 
 
 def notify_kibana() {
-def GIT_URL = bat (
-    script: 'git remote get-url origin',
-    returnStdout: true
-) 
+
 
 // def COMMIT = bat (
 //     script: 'git log',
@@ -47,6 +44,10 @@ bat "curl -kX POST \"http://127.0.0.1:5000/API/Jenkins/Build\" -H \"Content-Type
 
 stage 'Testing Post'
 node{
+    def GIT_URL = bat (
+    script: 'git remote get-url origin',
+    returnStdout: true
+) 
     notify_kibana()
 }
 
