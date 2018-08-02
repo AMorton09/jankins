@@ -30,7 +30,7 @@ node {
 def notify_kibana() {
 def GIT_URL = bat (
     script: 'git remote get-url origin',
-    returnStdout: true
+    returnStatus: true
 ).trim()
 
 // def COMMIT = bat (
