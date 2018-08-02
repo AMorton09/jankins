@@ -31,7 +31,7 @@ def notify_kibana() {
 def GIT_URL = bat (
     script: 'git remote get-url origin',
     returnStatus: true
-) == 0
+) 
 
 // def COMMIT = bat (
 //     script: 'git log',
