@@ -35,8 +35,8 @@ def notify_kibana() {
 //     returnStdout: true
 // ) 
 @NonCPS
-JsonBuilder post_request = new JsonBuilder()
-post_request.post  {
+def json = new groovy.json.JsonBuilder()
+json.post  {
    build {
     number "${env.BUILD_NUMBER}"
     log 'log'
@@ -61,7 +61,7 @@ post_request.post  {
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
 @NonCPS
-String post = JsonOutput.prettyPrint(post_request)
+String post = JsonOutput.prettyPrint(json.toString())
 
 
 //bat "echo ${post}"
