@@ -32,7 +32,7 @@ def GIT_URL = bat (
     returnStdout: true
 ) 
 
-JsonBuilder post_request = new JsonBuilder(generator)
+def post_request = new groovy.json.JsonBuilder(generator)
 post_request.post  {
    build {
     number "${env.BUILD_NUMBER}"
