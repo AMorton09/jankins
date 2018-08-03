@@ -61,11 +61,11 @@ builder.post  {
    url "lamp"
   }
 
-def json = builder.toString()
+//def json = builder.toString()
 
 
 
-bat "echo "+json
+bat "echo echo"
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
