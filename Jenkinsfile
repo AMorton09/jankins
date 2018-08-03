@@ -81,7 +81,34 @@ bat "echo echo"
 
 stage 'Testing Post'
 node{
-    bat "echo ARGRAGRAGARGARGRAGRAG"
+    JsonBuilder builder = new JsonBuilder()
+builder.post  {
+   build {
+    number "lamp"
+    log 'log'
+    url "lamp"
+    status "lamp"
+    scm {
+     culprits {}
+     changes {}
+     commit "lamp"
+     url "lamp"
+     branch "lamp"
+    }
+    timestamp "lamp"
+    notes ''
+    artifacts {}
+    phase 'COMPLETED'
+    full_url 'lamp'
+    queue_id 0
+   }
+   display_name "lamp"
+   name "lamp"
+   url "lamp"
+  }
+
+def json = JsonOutput.prettyPrint(builder.toString())
+    bat "echo ${json}"
 }
 
 
