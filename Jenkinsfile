@@ -61,7 +61,7 @@ post_request.post  {
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
 @NonCPS
-String post = JsonOutput.prettyPrint(post_request.toString())
+String post = JsonOutput.prettyPrint(post_request)
 
 
 //bat "echo ${post}"
