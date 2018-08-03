@@ -107,7 +107,7 @@ node{
         url "lamp"
         }
 
-    def json = JsonOutput.prettyPrint(builder.toString())
+    def json = builder.toString()
     //bat "echo ${json}"
 }
 
