@@ -1,5 +1,5 @@
 import hudson.FilePath
-import groovy.json.JsonBuilder
+
 
 stage 'CI'
 node {
@@ -33,7 +33,7 @@ def GIT_URL = bat (
     returnStdout: true
 ) 
 
-def post_request = new JsonBuilder(generator)
+def post_request = new JsonBuilder()
 post_request.post  {
    build {
     number "${env.BUILD_NUMBER}"
