@@ -36,7 +36,7 @@ def notify_kibana() {
 
 @NonCPS
 JsonBuilder builder = new JsonBuilder()
-builder.post  {
+builder.post  json {
    build {
     number "lamp"
     log 'log'
