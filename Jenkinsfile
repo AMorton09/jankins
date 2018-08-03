@@ -63,7 +63,7 @@ post_request.post  {
 String post = sonOutput.prettyPrint(post_request.toString())
 
 
-bat "echo ${post}"
+//bat "echo ${post}"
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
