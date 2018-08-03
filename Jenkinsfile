@@ -34,6 +34,7 @@ def notify_kibana() {
 //     script: 'git remote get-url origin',
 //     returnStdout: true
 // ) 
+@NonCPS
 JsonBuilder post_request = new JsonBuilder()
 post_request.post  {
    build {
@@ -59,7 +60,7 @@ post_request.post  {
    name "${env.JOB_NAME}"
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
-
+@NonCPS
 String post = JsonOutput.prettyPrint(post_request.toString())
 
 
