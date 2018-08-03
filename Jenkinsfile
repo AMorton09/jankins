@@ -57,7 +57,6 @@ post_request.post  {
    name "${env.JOB_NAME}"
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
- }
  
 String post = JsonOutput.prettyPrint(post_request.toString())
 // def COMMIT = bat (
