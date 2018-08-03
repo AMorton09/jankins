@@ -1,4 +1,5 @@
 import hudson.FilePath
+import groovy.json.JsonBuilder
 
 stage 'CI'
 node {
@@ -32,7 +33,7 @@ def GIT_URL = bat (
     returnStdout: true
 ) 
 
-def post_request = new groovy.json.JsonBuilder(generator)
+def post_request = new JsonBuilder(generator)
 post_request.post  {
    build {
     number "${env.BUILD_NUMBER}"
@@ -58,7 +59,7 @@ post_request.post  {
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
  
-//String post = post_request.toString()
+String post = post_request.toString()
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
