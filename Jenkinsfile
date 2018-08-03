@@ -80,6 +80,7 @@ bat "curl -kX POST \"http://127.0.0.1:5000/API/Jenkins/Build\" -H \"Content-Type
 
 stage 'Testing Post'
 node{
+    bat "echo I ADE IT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     notify_kibana()
 }
 
