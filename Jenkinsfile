@@ -60,8 +60,8 @@ json.post  {
    name "${env.JOB_NAME}"
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
-@NonCPS
-String post = JsonOutput.prettyPrint(json.toString())
+
+def post = JsonOutput.prettyPrint(json.toString())
 
 
 //bat "echo ${post}"
