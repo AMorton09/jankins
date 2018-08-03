@@ -33,7 +33,7 @@ def notify_kibana() {
 //     returnStdout: true
 // ) 
 
-
+@NonCPS
 JsonBuilder builder = new JsonBuilder()
 builder.post  {
    build {
@@ -59,7 +59,7 @@ builder.post  {
    name "${env.JOB_NAME}"
    url "job/${env.BUILD_DISPLAY_NAME}/${env.BUILD_NUMBER}"
   }
-
+@NonCPS
 def json = builder.toString()
 
 
