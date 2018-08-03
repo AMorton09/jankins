@@ -1,5 +1,5 @@
 import hudson.FilePath
-
+import groovy.json.JsonBuilder
 
 stage 'CI'
 node {
@@ -34,7 +34,7 @@ def notify_kibana() {
 // ) 
 
 
-def json = new groovy.json.JsonBuilder()
+JsonBuilder builder = new JsonBuilder()
 builder.post  {
    build {
     number "${env.BUILD_NUMBER}"
