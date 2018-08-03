@@ -1,6 +1,6 @@
 import hudson.FilePath
 import groovy.json.JsonBuilder
-
+import groovy.json.JsonOutput
 stage 'CI'
 node {
 
@@ -61,7 +61,7 @@ builder.post  {
    url "lamp"
   }
 
-def json = builder.toString()
+json = JsonOutput.prettyPrint(builder.toString())
 
 
 
