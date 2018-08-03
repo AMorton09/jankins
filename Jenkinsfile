@@ -61,7 +61,7 @@ builder.post  {
    url "lamp"
   }
 
-json = JsonOutput.prettyPrint(builder.toString())
+def json = JsonOutput.prettyPrint(builder.toString())
 
 
 
