@@ -61,7 +61,7 @@ builder.post  {
    url "lamp"
   }
 
-json = builder.toString()
+def json = builder.toString()
 
 
 
