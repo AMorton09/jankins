@@ -33,7 +33,7 @@ def notify_kibana() {
 //     returnStdout: true
 // ) 
 
-@NonCPS
+
 JsonBuilder builder = new JsonBuilder()
 builder.post  {
    build {
@@ -52,14 +52,14 @@ builder.post  {
     notes ''
     artifacts {}
     phase 'COMPLETED'
-    full_url '${env.BUILD_URL}'
+    full_url "${env.BUILD_URL}"
     queue_id 0
    }
    display_name "${env.BUILD_DISPLAY_NAME}"
    name "${env.JOB_NAME}"
    url "job/${env.BUILD_DISPLAY_NAME}/${env.BUILD_NUMBER}"
   }
-@NonCPS
+
 def json = builder.toString()
 
 
