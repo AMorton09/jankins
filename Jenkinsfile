@@ -36,7 +36,7 @@ JsonBuilder post_request = new JsonBuilder(generator)
 post_request.records  {
    build {
     number "${env.BUILD_NUMBER}",
-    log "",
+    log "log",
     url "${env.JOB_URL}",
     status "${currentBuild.currentResult}",
     scm {
