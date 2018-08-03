@@ -34,8 +34,7 @@ def notify_kibana() {
 //     script: 'git remote get-url origin',
 //     returnStdout: true
 // ) 
-@NonCPS
-def post_request = new JsonBuilder()
+JsonBuilder post_request = new JsonBuilder()
 post_request.post  {
    build {
     number "${env.BUILD_NUMBER}"
@@ -61,8 +60,10 @@ post_request.post  {
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
 
+String post = sonOutput.prettyPrint(post_request.toString())
 
 
+bat "echo ${post}"
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
