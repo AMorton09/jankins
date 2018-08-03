@@ -4,7 +4,7 @@ import groovy.json.JsonOutput
 
 node {
 
-stage 'Testing Post'
+stage("Testing Post") {
 
 
 printf "Before builder"   
@@ -37,6 +37,7 @@ builder.post {
 printf "Json Built"
 def json = builder.toString()
 printf "json: ${json}"
+}
 }
 
 
