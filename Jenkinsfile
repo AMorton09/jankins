@@ -65,7 +65,7 @@ def json = builder.toString()
 
 
 
-bat "echo ${json}"
+bat "echo $json"
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
