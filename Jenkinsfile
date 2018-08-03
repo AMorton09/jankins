@@ -1,5 +1,3 @@
-import groovy.json.JsonBuilder
- 
 import hudson.FilePath
 
 
@@ -60,7 +58,7 @@ json.post  {
    name "${env.JOB_NAME}"
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
-
+@NonCPS
 def post = JsonOutput.prettyPrint(json.toString())
 
 
