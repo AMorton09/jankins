@@ -34,7 +34,7 @@ def notify_kibana() {
 //     script: 'git remote get-url origin',
 //     returnStdout: true
 // ) 
-
+@NonCPS
 def post_request = new JsonBuilder()
 post_request.post  {
    build {
