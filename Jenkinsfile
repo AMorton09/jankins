@@ -30,10 +30,10 @@ node {
 
 
 def notify_kibana() {
-def GIT_URL = bat (
-    script: 'git remote get-url origin',
-    returnStdout: true
-) 
+// def GIT_URL = bat (
+//     script: 'git remote get-url origin',
+//     returnStdout: true
+// ) 
 
 def post_request = new JsonBuilder()
 post_request.post  {
