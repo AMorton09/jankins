@@ -32,34 +32,32 @@ def notify_kibana() {
 //     script: 'git remote get-url origin',
 //     returnStdout: true
 // ) 
-@NonCPS
-def json = new groovy.json.JsonBuilder()
-json.post  {
-   build {
-    number "${env.BUILD_NUMBER}"
-    log 'log'
-    url "${env.JOB_URL}"
-    status "${currentBuild.currentResult}"
-    scm {
-     culprits []
-     changes []
-     commit "${scm.GIT_COMMIT}"
-     url "${scm.GIT_URL}"
-     branch "${scm.GIT_BRANCH}"
-    }
-    timestamp "${currentBuild.startTimeInMillis - currentBuild.duration}"
-    notes ''
-    artifacts {}
-    phase 'COMPLETED'
-    full_url '${env.BUILD_URL}'
-    queue_id 0
-   }
-   display_name "${env.BUILD_DISPLAY_NAME}"
-   name "${env.JOB_NAME}"
-   url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
-  }
-@NonCPS
-def post = JsonOutput.prettyPrint(json.toString())
+
+def post_json = JsonOutput.toJson({"build": {
+	"number": "${env.BUILD_NUMBER}",
+	"log": "",
+	"url": "${env.JOB_URL}",
+	"status": "${currentBuild.currentResult}",
+	"scm": {
+		"culprits": [],
+		"changes": [],
+		"commit": "${scm.GIT_COMMIT}",
+		"url": "${scm.GIT_URL}",
+		"branch": "${scm.GIT_BRANCH}"
+	},
+	"timestamp": "${currentBuild.startTimeInMillis - currentBuild.duration},"
+	"notes": "",
+	"artifacts": {},
+	"phase": "COMPLETED",
+	"full_url": "${env.BUILD_URL}",
+	"queue_id": 0
+},
+"display_name": "${env.BUILD_DISPLAY_NAME}",
+"name": "${env.JOB_NAME}",
+"url": "job/${env.BUILD_DISPLAY_NAME}/${env.BUILD_NUMBER}"
+}
+)
+
 
 
 //bat "echo ${post}"
