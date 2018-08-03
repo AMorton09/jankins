@@ -36,7 +36,7 @@ def notify_kibana() {
 
 
 JsonBuilder builder = new JsonBuilder()
-builder.post  json {
+builder.post  {
    build {
     number "lamp"
     log 'log'
