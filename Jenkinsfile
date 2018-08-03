@@ -81,7 +81,7 @@ bat "echo echo"
 
 stage 'Testing Post'
 node{
-    bat "ARGRAGRAGARGARGRAGRAG"
+    bat "echo ARGRAGRAGARGARGRAGRAG"
 }
 
 
