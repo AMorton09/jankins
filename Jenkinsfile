@@ -34,7 +34,7 @@ def notify_kibana() {
 // ) 
 
 
-
+@NonCPS
 JsonBuilder builder = new JsonBuilder()
 builder.post  {
    build {
