@@ -58,7 +58,7 @@ post_request.post  {
    url 'job/' + "${env.BUILD_DISPLAY_NAME}" + '/' + "${env.BUILD_NUMBER}"
   }
  
-String post = post_request.toString()
+//String post = post_request.toString()
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
