@@ -11,12 +11,12 @@ node {
 
     // pull dependencies from npm
     // on windows use: bat 'npm install'
-    bat 'npm install'
+    sh 'npm install'
 
    
     // test with PhantomJS for "fast" "generic" results
     // on windows use: bat 'npm run test-single-run -- --browsers PhantomJS'
-    bat 'npm run test-single-run -- --browsers PhantomJS'
+    sh 'npm run test-single-run -- --browsers PhantomJS'
     
     // archive karma test results (karma is configured to export junit xml files)
     step([$class: 'JUnitResultArchiver', 
@@ -28,38 +28,13 @@ node {
 
 
 def notify_kibana() {
-bat "curl -X POST http://127.0.0.1:5000/API/Jenkins/Build -H 'Content-Type: application/json' -d '{
-                      "build": {
-                          "number": "0",
-                          "log": "log",
-                          "url": "lamp",
-                          "status": "lamp",
-                          "scm": {
-                              "culprits": {
-
-                              },
-                              "changes": {
-
-                              },
-                              "commit": "lamp",
-                              "url": "lamp",
-                              "branch": "lamp"
-                          },
-                          "timestamp": "0",
-                          "notes": "",
-                          "artifacts": {
-
-                          },
-                          "phase": "COMPLETED",
-                          "full_url": "lamp",
-                          "queue_id": "0"
-                      },
-                      "display_name": "lamp",
-                      "name": "lamp",
-                      "url": "lamp"
-                  }
-
-      '"
+node {
+  stage("Testing Post") {
+      json = "{ \"build\": { \"number\": \"lamp\", \"log\": \"log\", \"url\": \"lamp\", \"status\": \"lamp\", \"scm\": { \"culprits\": { }, \"changes\": { }, \"commit\": \"lamp\", \"url\": \"lamp\", \"branch\": \"lamp\" }, \"timestamp\": \"lamp\", \"notes\": \"\", \"artifacts\": { }, \"phase\": \"COMPLETED\", \"full_url\": \"lamp\", \"queue_id\": 0 }, \"display_name\": \"lamp\", \"name\": \"lamp\", \"url\": \"lamp\" }"
+      sh "curl -X POST \"http://127.0.0.1:5000/API/Jenkins/Build\" -H \"Content-Type: application/json\" -d \"${json}\""
+  }
+}
+                
 // def COMMIT = bat (
 //     script: 'git log',
 //     returnStdout: true
